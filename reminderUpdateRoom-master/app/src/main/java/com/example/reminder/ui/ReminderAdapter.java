@@ -46,9 +46,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(android.R.layout.simple_list_item_1, null);
-        // Return a new holder instance
         ReminderAdapter.ViewHolder viewHolder = new ReminderAdapter.ViewHolder(view);
-
+//invalte recyclerview with a card view
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.new_card_view, viewGroup,false);
         ReminderViewHolder reView = new ReminderViewHolder(v);
         return reView;
@@ -56,6 +55,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
 
     @Override
     public void onBindViewHolder(@NonNull final ReminderAdapter.ReminderViewHolder viewHolder, int i) {
+//fill card with text
         final Reminder currentItem = mReminders.get(i);
         final String mainText= currentItem.getReminderText();
         String[] m = mainText.split("-");
@@ -65,27 +65,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
             viewHolder.mStatus.setText(m[2]);
             viewHolder.mDate.setText(m[3]);
         }
-       /* viewHolder.mTitle.setText(m[0]);
-        viewHolder.mDiscription.setText(m[1]);
-        Log.d("Bind", m[2]);
-        if(m[2].contains("T")){viewHolder.mCheacked.setChecked(true);}
-        else{viewHolder.mCheacked.setChecked(false);}
-        if(viewHolder.mCheacked.isChecked() == true){
-            viewHolder.mTitle.setPaintFlags(viewHolder.mTitle.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-            viewHolder.mDiscription.setPaintFlags(viewHolder.mDiscription.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-        if(viewHolder.mCheacked.isChecked() == false){
-            viewHolder.mTitle.setPaintFlags(0);
-            viewHolder.mDiscription.setPaintFlags(0);
-        }
-        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                int i = viewHolder.getAdapterPosition();
-                main.AdapterDelete(i);
-                return false;
-            }
-        });*/
     }
 
     @Override

@@ -63,12 +63,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		//Initialize the instance variables
 		mRecyclerView = findViewById(R.id.recyclerView);
 		mReminders = new ArrayList<>();
 
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
 		mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public boolean onSingleTapUp(MotionEvent e) {
@@ -138,12 +136,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
+//reverse for loop deleting all cards
 		if (id == R.id.Delete) {
 		    for(int i = mReminders.size()-1; i >=0 ;i--){
                 mMainViewModel.delete(mReminders.get(i));
@@ -153,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
 		return super.onOptionsItemSelected(item);
 	}
 
+//When a card is selected proceed to updating it
 	@Override
 	public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
 		View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
@@ -160,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
 			int mAdapterPosition = recyclerView.getChildAdapterPosition(child);
 			if (mGestureDetector.onTouchEvent(motionEvent)) {
 				Intent intent = new Intent(this,UpdateActivity.class);
-				intent.putExtra(UPDATE_REMINDER,mReminders.get(mAdapterPosition).getReminderText());
+				intent.putExtra(UPDATE_REMINDER,mReminders.get(mAdapterPosition));
 				startActivityForResult(intent, UPDATECODE);
 			}
 		}
